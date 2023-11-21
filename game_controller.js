@@ -1,32 +1,38 @@
-
 $(document).ready(function() {
-    $("#submit").click(function() {
+    generateTable(5, 6, null);
+    $("#submit").click(function(event) {
         var rows = $("#rowsInput").val();
         var cols = $("#colsInput").val();
-
+        console.log("pressed button!");
+        event.preventDefault();
+        
         $.ajax({
             url: "setup.php",
             type: "GET",
             data: {rowsInput: rows, colsInput: cols},
-            success: function(data) {
+            success: function(result) {
                 // $("#output").html(data);
                 // Eric: edit this to make the game board appear
                 // display the data that you want.
-                //$("h3#errorMessage").
+                $("#errorMessage").text("result");
                 generateTable(rows, cols, data);
-                $("h3#errorMessage").text("done");
-                console.log(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $("#errorMessage").text("Error");
             }
         });
-        
+
+
     });
 });
 
 function generateTable(rows, cols, data){
-    for(var y; y<rows; y++){
-        for(var x; x<cols; x++){
-            alert("hello");
-            $("table#board").append("<th></th>");
+    alert(rows);
+    for(var y=0; y<rows; y++){
+        $("#board").append("<tr>");
+        for(var x=0; x<cols; x++){
+            $("#board").append("<th>Box</th>");
         }
+        $("#board").append("</tr>");
     }
 }
