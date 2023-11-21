@@ -15,7 +15,9 @@ $(document).ready(function() {
             type: "GET",
             data: {rowsInput: rows, colsInput: cols},
             success: function(result) {
-                generateTable(rows, cols, result);
+                var resultData=JSON.parse(result)
+                state=resultData;
+                generateTable(rows, cols, resultData);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 $("#errorMessage").text("Error");
@@ -28,10 +30,22 @@ $(document).ready(function() {
 
 function generateTable(rows, cols, data){
     $("#board").empty();
+    var count = 0;
     for(var y=0; y<rows; y++){
-        $("#board").append("<tr>");
+        var row = $("<tr>").appendTo("#board");
         for(var x=0; x<cols; x++){
-            $("#board").append("<td>Box</td>");
+            var cell = $("<td></td>").data('value', count).addClass("box").addClass("off_box").appendTo(row);
+            if(data[y][x]==1){
+                cell.removeClass("off_box");
+                cell.addClass("on_box");
+            }
+            cell.on("mouseover", function() {
+                $(this).addClass("hover_box");
+            });
+            cell.on("mouseout", function() {
+                $(this).removeClass("hover_box");
+            });
+            count++;
         }
         $("#board").append("</tr>");
     }
@@ -40,8 +54,6 @@ function generateTable(rows, cols, data){
 function checkIfWin() {
 
     let win = true;
-    // TODO: Make a loop that iterates through each box in the board to see
-    // if status of light is all off. If so, then the player wins.
 
     for(let i=0; i<state.length; i++) {
         if(state[i] == 1) {
