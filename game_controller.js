@@ -1,10 +1,15 @@
+
 $(document).ready(function() {
+
         
     $("#submit").click(function(event) {
-        var rows = $("#rowsInput").val();
-        var cols = $("#colsInput").val();
+        let rows = $("#rowsInput").val();
+        let cols = $("#colsInput").val();
         console.log("pressed button!");
         event.preventDefault();
+        $("#gameMessage").text("");
+
+        // TODO: Clear the board first if one exists
         
         $.ajax({
             url: "setup.php",
@@ -22,6 +27,21 @@ $(document).ready(function() {
             }
         });
 
-
     });
+
 });
+
+function checkIfWin() {
+
+    let win = false;
+    // TODO: Make a loop that iterates through each box in the board to see
+    // if status of light is all off. If so, then the player wins.
+
+    if(win) {
+        displayWinMessage();
+    }
+}
+
+function displayWinMessage() {
+    $("#gameMessage").text("You win!");
+}
