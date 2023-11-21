@@ -1,3 +1,6 @@
+// By Daniel Huynh (tap7ke) and Eric Li
+
+
 var state=[];
 var won = false;
 
