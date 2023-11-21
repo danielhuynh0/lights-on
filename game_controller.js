@@ -1,10 +1,14 @@
+
 $(document).ready(function() {
     generateTable(5, 6, null);
     $("#submit").click(function(event) {
-        var rows = $("#rowsInput").val();
-        var cols = $("#colsInput").val();
+        let rows = $("#rowsInput").val();
+        let cols = $("#colsInput").val();
         console.log("pressed button!");
         event.preventDefault();
+        $("#gameMessage").text("");
+
+        // TODO: Clear the board first if one exists
         
         $.ajax({
             url: "setup.php",
