@@ -1,6 +1,9 @@
-<!-- By Daniel Huynh (tap7ke) and Eric Li -->
 <?php
 
+// By Daniel Huynh (tap7ke) and Eric Li
+
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 $rows = 0;
 $columns = 0;
 $board_array = array();
@@ -9,15 +12,13 @@ if (isset($_GET)) {
     if(isset($_GET["rowsInput"])) {
         $rows = $_GET["rowsInput"];
     } else {
-        header("Location: index.html");
-        exit();
+        echo "rows not set";
     }
 
     if(isset($_GET["colsInput"])) {
         $columns = $_GET["colsInput"];
     } else {
-        header("Location: index.html");
-        exit();
+        echo "columns not set";
     }
 
     if($rows * $columns < 7) {
@@ -53,8 +54,7 @@ if (isset($_GET)) {
         
     }
 } else {
-    header("Location: index.html");
-    exit();
+    echo "GET not set";
 }
 
 ?>
