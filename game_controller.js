@@ -38,3 +38,28 @@ function generateTable(rows, cols, data){
         $("#board").append("</tr>");
     }
 }
+
+function checkIfWin() {
+
+    let win = true;
+    // TODO: Make a loop that iterates through each box in the board to see
+    // if status of light is all off. If so, then the player wins.
+
+    for(let i=0; i<state.length; i++) {
+        if(state[i] == 1) {
+            win = false;
+            break;
+        }
+        else {
+            win = true;
+        }
+    }
+
+    if(win) {
+        displayWinMessage();
+    }
+}
+
+function displayWinMessage() {
+    $("#gameMessage").text("You win!");
+}
